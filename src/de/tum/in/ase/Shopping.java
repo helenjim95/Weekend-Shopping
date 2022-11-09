@@ -16,6 +16,9 @@ public final class Shopping {
 
 	// TODO: implement search(String itemName)
 	public int search(String itemName) {
+		if (shoppingList.length == 0) {
+			return -1;
+		} else {
 //		check if itemName exists in shoppingList: if yes: return -1 / if not: return index of the item in the list
 		for (int i = 0; i < shoppingList.length; i++) {
 			if (shoppingList[i].getName().equals(itemName)) {
@@ -23,6 +26,7 @@ public final class Shopping {
 			}
 		}
 		return -1;
+		}
 	}
 
 	// TODO: implement findMin()
