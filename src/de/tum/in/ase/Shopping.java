@@ -14,9 +14,10 @@ public final class Shopping {
 		this.bagCapacity = bagCapacity;
 	}
 
+//	need to fix for when shoppingList is null
 	// TODO: implement search(String itemName)
 	public int search(String itemName) {
-		if (shoppingList.length == 0) {
+		if (shoppingList == null || shoppingList.length == 0) {
 			return -1;
 		} else {
 //		check if itemName exists in shoppingList: if yes: return -1 / if not: return index of the item in the list
@@ -71,9 +72,10 @@ public final class Shopping {
 		} else {
 //		there should be no empty spot in the new shopping list - new list is the same length as original list
 			List<Item> copy_of_shopping_list = new ArrayList<>(Arrays.asList(shoppingList));
+			int shopping_list_length = copy_of_shopping_list.size();
 			List<Item> new_shoppingList = new ArrayList<>();
 			int sum_weight = 0;
-			while(new_shoppingList.size() < copy_of_shopping_list.size()) {
+			while(new_shoppingList.size() < shopping_list_length) {
 				//		maximize value
 				int max_index = findMax();
 				Item max_item = shoppingList[max_index];
