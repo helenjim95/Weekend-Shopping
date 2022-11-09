@@ -76,7 +76,7 @@ public final class Shopping {
 			List<Item> new_shoppingList = new ArrayList<>();
 			int sum_weight = 0;
 			int max_weight = 0;
-			while(copy_of_shopping_list.size() > 0 && sum_weight < bagCapacity) {
+			while(copy_of_shopping_list.size() > 0) {
 				//		maximize value
 				int max_index = findMax();
 				Item max_item = shoppingList[max_index];
