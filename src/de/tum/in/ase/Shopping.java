@@ -14,7 +14,6 @@ public final class Shopping {
 		this.bagCapacity = bagCapacity;
 	}
 
-//	need to fix for when shoppingList is null
 	// TODO: implement search(String itemName)
 	public int search(String itemName) {
 		if (shoppingList == null || shoppingList.length == 0) {
@@ -64,6 +63,7 @@ public final class Shopping {
 		}
 	}
 
+//	need to fix this: how many items does the new shopping list should have?
 	// TODO: implement fillBagMax()
 	public Item[] fillBagMax() {
 //		Return null if there is no prepared shopping list yet.
@@ -75,11 +75,12 @@ public final class Shopping {
 			int shopping_list_length = copy_of_shopping_list.size();
 			List<Item> new_shoppingList = new ArrayList<>();
 			int sum_weight = 0;
-			while(new_shoppingList.size() < shopping_list_length) {
+			int max_weight = 0;
+			while(copy_of_shopping_list.size() > 0 && sum_weight < bagCapacity) {
 				//		maximize value
 				int max_index = findMax();
 				Item max_item = shoppingList[max_index];
-				int max_weight = max_item.getWeight();
+				max_weight = max_item.getWeight();
 				//		ensure sum of their weights does not exceed the maximum bagCapacity
 				if (sum_weight + max_weight <= bagCapacity) {
 					new_shoppingList.add(max_item);
