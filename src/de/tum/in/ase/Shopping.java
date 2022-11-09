@@ -70,7 +70,8 @@ public final class Shopping {
 		if (shoppingList.length == 0) {
 			return null;
 		} else {
-//		there should be no empty spot in the new shopping list - new list is the same length as original list
+//			TODO: need to fix this
+//		stopping condition - new list's total item weight <= bagCapacity or copy_of_shopping_list length == 0
 			List<Item> copy_of_shopping_list = new ArrayList<>(Arrays.asList(shoppingList));
 			int shopping_list_length = copy_of_shopping_list.size();
 			List<Item> new_shoppingList = new ArrayList<>();
