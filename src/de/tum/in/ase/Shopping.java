@@ -73,25 +73,33 @@ public final class Shopping {
 //			TODO: need to fix this
 //		stopping condition - new list's total item weight <= bagCapacity or copy_of_shopping_list length == 0
 			List<Item> copy_of_shopping_list = new ArrayList<>(Arrays.asList(shoppingList));
-			int shopping_list_length = copy_of_shopping_list.size();
+			int shoppingList_length = shoppingList.length;
 			List<Item> new_shoppingList = new ArrayList<>();
+			List<Item> searched_list = new ArrayList<>();
 			int sum_weight = 0;
 			int max_weight = 0;
 			while(copy_of_shopping_list.size() > 0) {
 				//		maximize value
+//				TODO: need to fix this (not to find max for the original list
 				int max_index = findMax();
 				Item max_item = shoppingList[max_index];
 				max_weight = max_item.getWeight();
 				//		ensure sum of their weights does not exceed the maximum bagCapacity
-				if (sum_weight + max_weight <= this.bagCapacity) {
-					new_shoppingList.add(max_item);
-					copy_of_shopping_list.remove(max_item);
-					sum_weight += max_weight;
-				} else {
-					//		If the next item with highest value is too heavy,
-//		then leave it out and try to find the next item with fitting weight and highest value
-//		among the remaining items
-					copy_of_shopping_list.remove(max_item);
+				if (!searched_list.contains(max_item)) {
+					if (sum_weight + max_weight <= this.bagCapacity) {
+						new_shoppingList.add(max_item);
+						copy_of_shopping_list.remove(max_item);
+						sum_weight += max_weight;
+//						set the searched max_item value to 0 so that it's not max anymore
+
+					} else {
+						//		If the next item with highest value is too heavy,
+	//		then leave it out and try to find the next item with fitting weight and highest value
+	//		among the remaining items
+						copy_of_shopping_list.remove(max_item);
+					}
+					max_item.setValue(0);
+					searched_list.add(max_item);
 				}
 			}
 //			convert List<Item> back to Item[]
@@ -117,5 +125,21 @@ public final class Shopping {
 
 	public static void main(String[] args) {
 		//you can test your code here by creating your own shopping object
+		Item computer = new Item("computer", 10, 10);
+		Item headphone = new Item("headphone", 5, 5);
+		Item mouse = new Item("mouse", 4, 3);
+		Item keyboard = new Item("keyboard", 6, 6);
+		Item charger = new Item("charger", 2, 2);
+		Item[] shoppingList = new Item[] {computer, headphone, mouse, keyboard, charger};
+		Shopping shopping = new Shopping(shoppingList, 15);
+//		System.out.printf("search result (o): %d%n", shopping.search("charger"));
+//		System.out.printf("search result (x): %d%n", shopping.search("macbook"));
+//		System.out.printf("min: %d%n", shopping.findMin());
+//		System.out.printf("max: %d%n", shopping.findMax());
+		Item[] new_list = shopping.fillBagMax();
+		System.out.println("new_list: ");
+		for (Item item : new_list) {
+			System.out.println(item.getName());
+		}
 	}
 }

@@ -22,4 +22,16 @@ public class Item {
 	public int getValue() {
 		return value;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
 }
