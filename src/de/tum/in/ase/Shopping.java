@@ -83,7 +83,7 @@ public final class Shopping {
 				Item max_item = shoppingList[max_index];
 				max_weight = max_item.getWeight();
 				//		ensure sum of their weights does not exceed the maximum bagCapacity
-				if (sum_weight + max_weight <= bagCapacity) {
+				if (sum_weight + max_weight <= this.bagCapacity) {
 					new_shoppingList.add(max_item);
 					copy_of_shopping_list.remove(max_item);
 					sum_weight += max_weight;
@@ -94,7 +94,7 @@ public final class Shopping {
 					copy_of_shopping_list.remove(max_item);
 				}
 			}
-//			conver List<Item> back to Item[]
+//			convert List<Item> back to Item[]
 			Item[] new_shoppingList_array = new Item[new_shoppingList.size()];
 			new_shoppingList_array = new_shoppingList.toArray(new_shoppingList_array);
 			return new_shoppingList_array;
