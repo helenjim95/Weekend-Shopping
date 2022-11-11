@@ -8,17 +8,11 @@ import java.util.List;
 public final class Shopping {
 //	TODO: contructor only two, write new find max method?
 	private final Item[] shoppingList;
-	private List<Item> copy_of_shopping_list;
-	private List<Item> new_shoppingList;
-	private List<Item> searched_list;
 	private int bagCapacity;
 
 	public Shopping(Item[] shoppingList, int bagCapacity) {
 		this.shoppingList = shoppingList;
 		this.bagCapacity = bagCapacity;
-		this.copy_of_shopping_list = new ArrayList<>(Arrays.asList(shoppingList));
-		this.new_shoppingList = new ArrayList<>();
-		this.searched_list = new ArrayList<>();
 	}
 
 	// TODO: implement search(String itemName)
@@ -26,7 +20,7 @@ public final class Shopping {
 		if (shoppingList == null || shoppingList.length == 0) {
 			return -1;
 		} else {
-//		check if itemName exists in shoppingList: if yes: return -1 / if not: return index of the item in the list
+//		check if itemName exists in shoppingList: if yes: return index of the item in the list / if not: return -1
 		for (int i = 0; i < shoppingList.length; i++) {
 			if (shoppingList[i].getName().equals(itemName)) {
 				return i;
@@ -38,15 +32,15 @@ public final class Shopping {
 
 	// TODO: implement findMin()
 	public int findMin() {
-		if (this.copy_of_shopping_list.size() == 0) {
+		if (shoppingList.length == 0) {
 			return -1;
 		} else {
 			int temp_index_min = 0;
-			int min_value = copy_of_shopping_list.get(0).getValue();
-			for (int i = 1; i < copy_of_shopping_list.size(); i++) {
-				if (copy_of_shopping_list.get(i).getValue() < min_value) {
+			int min_value = shoppingList[0].getValue();
+			for (int i = 1; i < shoppingList.length; i++) {
+				if (shoppingList[i].getValue() < min_value) {
 					temp_index_min = i;
-					min_value = copy_of_shopping_list.get(i).getValue();
+					min_value = shoppingList[i].getValue();
 				}
 			}
 			return temp_index_min;
@@ -55,15 +49,31 @@ public final class Shopping {
 
 	// TODO: implement findMax()
 	public int findMax() {
-		if (copy_of_shopping_list.size() == 0) {
+		if (shoppingList.length == 0) {
 			return -1;
 		} else {
 			int temp_index_max = 0;
-			int max_value = copy_of_shopping_list.get(0).getValue();
-			for (int i = 1; i < copy_of_shopping_list.size(); i++) {
-				if (copy_of_shopping_list.get(i).getValue() >= max_value) {
+			int max_value = shoppingList[0].getValue();
+			for (int i = 1; i < shoppingList.length; i++) {
+				if (shoppingList[i].getValue() >= max_value) {
 					temp_index_max = i;
-					max_value = copy_of_shopping_list.get(i).getValue();
+					max_value = shoppingList[i].getValue();
+				}
+			}
+			return temp_index_max;
+		}
+	}
+
+	public int findMax(List<Item> shoppingList) {
+		if (shoppingList.size() == 0) {
+			return -1;
+		} else {
+			int temp_index_max = 0;
+			int max_value = shoppingList.get(0).getValue();
+			for (int i = 1; i < shoppingList.size(); i++) {
+				if (shoppingList.get(i).getValue() >= max_value) {
+					temp_index_max = i;
+					max_value = shoppingList.get(i).getValue();
 				}
 			}
 			return temp_index_max;
@@ -74,21 +84,19 @@ public final class Shopping {
 	// TODO: implement fillBagMax()
 	public Item[] fillBagMax() {
 //		Return null if there is no prepared shopping list yet.
-		if (copy_of_shopping_list.size() == 0) {
+		if (shoppingList.length == 0) {
 			return null;
 		} else {
-//			TODO: need to fix this
 //		stopping condition - new list's total item weight <= bagCapacity or copy_of_shopping_list length == 0
-//			List<Item> copy_of_shopping_list = new ArrayList<>(Arrays.asList(shoppingList));
-			int shoppingList_length = shoppingList.length;
-//			List<Item> new_shoppingList = new ArrayList<>();
-//			List<Item> searched_list = new ArrayList<>();
+			List<Item> copy_of_shopping_list = new ArrayList<>(Arrays.asList(shoppingList));
+			List<Item> new_shoppingList = new ArrayList<>();
+			List<Item> searched_list = new ArrayList<>();
 			int sum_weight = 0;
 			int max_weight = 0;
 			while(copy_of_shopping_list.size() > 0) {
 				//		maximize value
 //				TODO: need to fix this (not to find max for the original list
-				int max_index = findMax();
+				int max_index = findMax(copy_of_shopping_list);
 				Item max_item = copy_of_shopping_list.get(max_index);
 				max_weight = max_item.getWeight();
 				//		ensure sum of their weights does not exceed the maximum bagCapacity
