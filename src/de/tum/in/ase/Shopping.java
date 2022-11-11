@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public final class Shopping {
+//	TODO: contructor only two, write new find max method?
 	private final Item[] shoppingList;
 	private List<Item> copy_of_shopping_list;
 	private List<Item> new_shoppingList;
